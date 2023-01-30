@@ -509,7 +509,7 @@
   <target name="run" depends='clean,compile,remove,install'
    description="re run the app">
   </target>
-  <!-- =====================run tomcat server -->
+  <!-- =====================run tomcat server =============================-->
   <target name="runserver" 
    description="run tomcat server">
   </target>
