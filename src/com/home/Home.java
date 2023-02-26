@@ -35,23 +35,25 @@ public class Home extends HttpServlet {
                 out.println(Components.HEADER);
                 String card = "";
 
-                for (int i = 0; i < courses.size(); i++) {
-                    String url = courses.get(i).getCover() == null ? ""
-                            : "http://localhost:8580" + courses.get(i).getCover();
+                for (Course cors : courses) {
+                    String url = cors.getCover() == null ? ""
+                            : "http://localhost:8580" + cors.getCover();
 
                     card += """
                                 <div class="inner-card">
                                 <img src= "image" alt="dies picture" width="300">
                                 <h2>name</h2>
                                 <p>desc</p>
-                                <button class="mabtn" type="button">Add Course</button>
+                                <button formaction="param-here" class="mabtn" type="button"><a href="param-here">View Course</a></button>
                             </div>
-                                    """.replace("name", courses.get(i).getName()).replace("desc",
-                            courses.get(i).getDescription())
+                                    """
+                            .replace("name", cors.getName()).replace("desc",
+                                    cors.getDescription())
+                            .replace("param-here", "course?course=" + cors.getId())
 
                             .replace("image", url);
 
-                    System.out.println(courses.get(i).getCover());
+                    System.out.println(cors.getCover());
 
                 }
                 out.println(card + "</div></section>");

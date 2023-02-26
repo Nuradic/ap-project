@@ -82,14 +82,14 @@ public class test {
         // System.out.println(lk.size());
 
         // System.out.println("hello me".replaceAll("me", "it is me"));
-        try {
-            System.setSecurityManager(new RMISecurityManager());
-            SampleServer s = new SampleServer();
-            Naming.rebind("Sample1", s);
-            System.out.println("Server Waiting...");
-        } catch (RemoteException e) {
+        // try {
+        // System.setSecurityManager(new RMISecurityManager());
+        // SampleServer s = new SampleServer();
+        // Naming.rebind("Sample1", s);
+        // System.out.println("Server Waiting...");
+        // } catch (RemoteException e) {
 
-        }
+        // }
 
     }
 }

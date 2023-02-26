@@ -5,7 +5,16 @@
     margin: 0px;
     box-sizing: border-box;
 }
+.inner-card a{
+    color: #f3f3f3;
+    text-decoration: none;
 
+}
+.inner-card materialbtn:hover{
+color:#f3f3f3;
+cursor: pointer;
+
+}
 :root {
     --linear-grad: linear-gradient(to right, #141E30, #243B55);
     --grad-clr1: #141E30;
@@ -219,7 +228,11 @@ section{
     min-height: 800px;
     
 }
-
+.card-container img{
+    /* width:300px; */
+    height:300px;
+    object-fit: cover;
+}
 
 .inner-card{
     width: 300px;

@@ -1,0 +1,15 @@
+.admin{
+width: 250px;
+position: relative;
+left: 400px;
+}
+.admin-container{
+    border: 1px black;
+    position: relative;
+    left: 120px;
+
+}
+.admininfo{
+    position: relative;
+    left: 80px;
+}

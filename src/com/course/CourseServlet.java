@@ -88,11 +88,13 @@ public class CourseServlet extends HttpServlet {
 
                 for (CourseMaterial mat : cors.getMaterials()) {
                     material += """
-                            <div class="materials">
-                                <div><p><a href="link-here">item-here</a></p></div>
-                                <div><a href="link-here"><button class="btn download"><i class="fa fa-download"></i> </button></i></a></div></div>
-                                </div>\n
-                                    """
+                            <li>
+                                <div class="materials">
+                                    <div><p><a href="link-here">item-here</a></p></div>
+                                    <div><a href="link-here"><button class="btn download"><i class="fa fa-download"></i> </button></i></a></div>
+                                    </div>\n
+                            </li>
+                                        """
                             .replaceAll("link-here", mat.getUrl()).replace("item-here", mat.getName());
 
                 }

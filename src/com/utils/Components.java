@@ -267,7 +267,9 @@ public class Components {
                             <div><p>description-here</p></div>
                                 <h1>MATERIALS</h1>
                                 <div class="" >
+                                <ol>
                                 material-here
+                                </ol>
                                 </div>
                             </div>
                        </div>

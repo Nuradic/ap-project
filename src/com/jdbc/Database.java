@@ -350,4 +350,24 @@ public class Database {
         return false;
     }
 
+    private static Boolean Delete(String column, Tables table, String value)
+            throws ClassNotFoundException, SQLException {
+
+        Connection con = connect();
+
+        Statement st = con.createStatement();
+
+        return st.execute("DELETE FROM " + getTable(table) + " where " + column + "=" + value);
+
+    }
+
+    public static Boolean deleteCourse(int id) throws ClassNotFoundException, SQLException {
+        return Delete("id", Tables.COURSE, "" + id);
+
+    }
+
+    public static Boolean deleteUser(String email) throws ClassNotFoundException, SQLException {
+        return Delete("email", Tables.USER, email);
+    }
+
 }
