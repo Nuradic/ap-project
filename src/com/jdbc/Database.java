@@ -168,6 +168,24 @@ public class Database {
 
     }
 
+    public static Boolean setQuestion(Question q) throws ClassNotFoundException, SQLException {
+
+        ArrayList<Object> values = new ArrayList<Object>();
+        values.add(q.getBody());
+        values.add(q.getUser().getId());
+
+        String[] columns = { "body", "user" };
+
+        return insert(values, columns, Tables.QUESTION);
+    }
+
+    public static ArrayList<Question> getQuestions() {
+        ArrayList<Question> vals = new ArrayList<Question>();
+        String statement = "SELECT* FROM QUESTION ORDER BY date";
+
+        return vals;
+    }
+
     public static ArrayList<Course> getCourses(int user_id) throws ClassNotFoundException, SQLException {
         String statement = "SELECT course_user.payment,course.name,course.description,course.id FROM course_user INNER JOIN COURSE ON course.id=course_user.course_id WHERE user_id="
                 + user_id;
@@ -185,6 +203,35 @@ public class Database {
             cors = new Course(name);
             cors.setId(id);
             cors.setDescription(desc);
+            courses.add(cors);
+
+        }
+
+        return courses;
+
+    }
+
+    public static ArrayList<Course> getCourses(String name) throws ClassNotFoundException, SQLException {
+        String st = "SELECT* from COURSE where name LIKE " + "'%" + name + "%'";
+
+        System.out.println(st);
+
+        ResultSet rs = get(st);
+        ArrayList<Course> courses = new ArrayList<Course>();
+
+        Course cors;
+
+        while (rs.next()) {
+            String nam = rs.getString("name");
+            String desc = rs.getString("description");
+            String cover = rs.getString("cover");
+            int id = rs.getInt("id");
+            cors = new Course(nam);
+            cors.setId(id);
+            cors.setDescription(desc);
+            cors.setCover(cover);
+            cors.setMaterials(getCourseMaterials(cors));
+
             courses.add(cors);
 
         }

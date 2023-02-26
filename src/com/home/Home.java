@@ -20,6 +20,7 @@ public class Home extends HttpServlet {
         PrintWriter out = res.getWriter();
 
         HttpServletResponse res2;
+        String search = req.getParameter("search");
 
         try {
             res2 = Authentication.authenticate(req, res);
@@ -30,9 +31,14 @@ public class Home extends HttpServlet {
             } else {
                 RequestDispatcher dis = req.getRequestDispatcher("/footer.html");
 
-                ArrayList<Course> courses = Database.getCourses();
+                ArrayList<Course> courses = search == null ? Database.getCourses() : Database.getCourses(search);
 
-                out.println(Components.HEADER);
+                String header = search == null || search.strip().equals("")
+
+                        ? Components.HEADER
+                        : Components.HEADER.replace("<h1><span> TOP</span> Categories</h1>", "").replace("value-here",
+                                search);
+                out.println(header);
                 String card = "";
 
                 for (Course cors : courses) {
@@ -44,7 +50,7 @@ public class Home extends HttpServlet {
                                 <img src= "image" alt="dies picture" width="300">
                                 <h2>name</h2>
                                 <p>desc</p>
-                                <button formaction="param-here" class="mabtn" type="button"><a href="param-here">View Course</a></button>
+                                <button  class="mabtn" type="button"><a href="param-here">View Course</a></button>
                             </div>
                                     """
                             .replace("name", cors.getName()).replace("desc",

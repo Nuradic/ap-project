@@ -101,14 +101,12 @@ public class CourseServlet extends HttpServlet {
                 content = content.replace("material-here", material).replace("description-here", cors.getDescription());
 
                 out.print(content);
-                // System.out.println("welcome to the hell twice");
 
             } else {
 
             }
 
         } catch (NumberFormatException e) {
-            // PrintWriter out = res.getWriter();
             res.setContentType("text/html");
 
             out.print(Components.UPLOADCOURSE);

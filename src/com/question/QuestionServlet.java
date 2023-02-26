@@ -3,6 +3,7 @@ package com.question;
 import javax.servlet.http.HttpServlet;
 
 import com.utils.Authentication;
+import com.utils.Components;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -52,7 +53,7 @@ public class QuestionServlet extends HttpServlet {
         res.setContentType("text/html");
 
         PrintWriter out = res.getWriter();
-        out.print("<h1>Hello Ready to Code</h1>");
+        out.print(Components.SOCIAL);
 
     }
 

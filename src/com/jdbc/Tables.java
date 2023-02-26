@@ -7,6 +7,7 @@ public enum Tables {
     COURSE,
     DEPARTMENT,
     COURSE_MATERIAL,
-    COURSE_USER
+    COURSE_USER,
+    QUESTION
 
 }

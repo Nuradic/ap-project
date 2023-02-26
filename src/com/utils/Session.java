@@ -30,6 +30,5 @@ public class Session {
         cookies.add(cookie);
 
     }
-    // public static
 
 }

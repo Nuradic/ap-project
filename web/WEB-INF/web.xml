@@ -15,11 +15,11 @@
     </servlet>
     <servlet>
         <servlet-name>login</servlet-name>
-        <servlet-class>com.home.Login</servlet-class>
+        <servlet-class>com.login.Login</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>logout</servlet-name>
-        <servlet-class>com.home.Logout</servlet-class>
+        <servlet-class>com.login.Logout</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>register</servlet-name>

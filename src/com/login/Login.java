@@ -1,4 +1,4 @@
-package com.home;
+package com.login;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServlet;

@@ -164,6 +164,9 @@ public class Components {
             <li class="nav-item">
             <a href="#HELP">Support</a>
             </li>
+            <li class="nav-item">
+            <a href="logout">LOG OUT</a>
+            </li>
             </ul>
 
             </nav>
@@ -174,13 +177,15 @@ public class Components {
             <div class="background">
             <div class="home">
             <p class="para-home">Over Hundred courses to develope youself</p>
+            <form action="" method="get">
             <div class="search">
             <input class="search-input" type="text" placeholder="search for your course"
-            id="search" >
+            id="search" name="search" value="value-here">
             <label for="search">
-            <i class="fa-solid fa-magnifying-glass" for="search"></i>
+            <button ><i class="fa-solid fa-magnifying-glass" for="search"></i></button>
             </label>
             </div>
+            </form>
             </div>
             </div>
 
@@ -250,7 +255,7 @@ public class Components {
                 <br>
                 <div class="dash-container">
                     <div class="sidebar">
-                        <form action="/">
+                        <form action="course">
                             <input type="text" name="search">
                             <button>Search</button>
                         </form>
@@ -327,5 +332,85 @@ public class Components {
             </body>
             </html>
                 """;
+
+    public static String SOCIAL = """
+            <!DOCTYPE html>
+            <html>
+            <head>
+            <title>Social</title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+            <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+            <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="css/admin.css">
+            <link rel="icon" href="icon.jpg">
+            <style>
+            html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
+            </style>
+            </head>
+            <body class="w3-theme-l5">
+            <div class="w3-container w3-content" style="max-width:1400px;margin-top:0px">
+
+              <div class="w3-row">
+
+                <div class="admin">
+                  <div class="admin-container">
+                    <h4 class="w3-center">My Profile</h4>
+                   <p class="w3-center"><img src="/img/admin.jpg" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
+                   <hr>
+                   <p class="admininfo"><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Admin </p>
+                   <p class="admininfo"><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> Adama, Ethiopia</p>
+                   <p class="admininfo"><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1,2002 </p>
+                  </div>
+                </div>
+                <br>
+                <div class="middle">
+
+                  <div class="w3-row-padding">
+                    <div class="w3-col m12">
+                      <div class="w3-card w3-round w3-white">
+                        <div class="w3-container w3-padding">
+                          <p contenteditable="true" class="w3-border w3-padding">Status: </p>
+                          <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i> &nbsp;Post</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                 cards-here
+
+                </div>
+              </div>
+            </div>
+            <br>
+            <script>
+            function myFunction(id) {
+              var x = document.getElementById(id);
+              if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+                x.previousElementSibling.className += " w3-theme-d1";
+              } else {
+                x.className = x.className.replace("w3-show", "");
+                x.previousElementSibling.className =
+                x.previousElementSibling.className.replace(" w3-theme-d1", "");
+              }
+            }
+
+            // Used to toggle the menu on smaller screens when clicking on the menu button
+            function openNav() {
+              var x = document.getElementById("navDemo");
+              if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+              } else {
+                x.className = x.className.replace(" w3-show", "");
+              }
+            }
+            </script>
+            </body>
+            </html>
+
+                                    """;
 
 }
