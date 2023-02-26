@@ -6,9 +6,6 @@ import javax.servlet.http.*;
 
 import com.jdbc.Database;
 import com.models.User;
-// how to create java bean object? 
-
-//Source: https://stackoverflow.com/questions/3295496
 
 public class Authentication {
 
@@ -29,16 +26,20 @@ public class Authentication {
 
             if ((map.containsKey("id") && map.containsKey("password"))) {
                 System.out.println(map.get("id"));
+                try {
 
-                int id = Integer.parseInt((String) map.get("id"));
+                    int id = Integer.parseInt((String) map.get("id"));
 
-                String pass = (String) map.get("password");
+                    String pass = (String) map.get("password");
 
-                user = authenticate(id, pass);
+                    user = authenticate(id, pass);
 
-                if (user != null)
-                    return res;
+                    if (user != null)
+                        return res;
 
+                } catch (NumberFormatException e) {
+
+                }
             }
         }
 
@@ -75,6 +76,14 @@ public class Authentication {
             return user;
         }
         return null;
+    }
+
+    public static HttpServletResponse logout(HttpServletRequest req, HttpServletResponse res) {
+        res.addCookie(new Cookie("id", null));
+        res.addCookie(new Cookie("password", null));
+
+        return res;
+
     }
 
     public static HttpServletResponse setCookie(HttpServletResponse res, User user) {

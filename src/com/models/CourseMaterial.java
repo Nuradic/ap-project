@@ -8,7 +8,7 @@ public class CourseMaterial {
 
     public CourseMaterial(String url, int course_id) {
 
-        this.url = name;
+        this.url = url;
         this.course_id = course_id;
 
     }

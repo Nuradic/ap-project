@@ -1,3 +1,6 @@
+<%-- <%@ page import="java.util.*,com.models.*,com.jdbc.*"%>
+<%!ArrayList<Course>courses=Database.getCourses();%> --%>
+<%-- <%! ArrayList courses= request.getAttribute("courses")%> --%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +41,6 @@
         <div class="background">
            <div class="home">           
             <p class="para-home">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Delectus omnis soluta odit et id doloribus!</p>
-                <!-- <img src="" alt=""> -->
                 <div class="search">
                     <input class="search-input" type="text" placeholder="search for your course" id="search" >
                     <label for="search">
@@ -69,7 +71,6 @@
                 </div>
             </div>
            
-
             <div class="for expert-tutors">                
                 <i class="fa-solid fa-user-tie"></i>
                 <div class="">
@@ -104,62 +105,14 @@
             %>
             <div class="inner-card">
                 <img src="./image/dies.jpg" alt="dies picture" width="300">
-                <h2>Course Name</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque et hic ipsam.</p>
+                <h2>Hello</h2>
+                <p>World!</p>
                 <button>Add Course</button>
             </div>
             <%
         }
 
         %>
-            <%-- <div class="inner-card">
-                <img src="./image/dies.jpg" alt="dies picture">
-                <h2>Course Name</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque et hic ipsam.</p>
-                <button>Add Course</button>
-            </div>
-            <div class="inner-card">
-                <img src="./image/dies.jpg" alt="dies picture" width="300">
-                <h2>Course Name</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque et hic ipsam.</p>
-                <button>Add Course</button>
-            </div>
-            <div class="inner-card">
-                <img src="./image/dies.jpg" alt="dies picture" width="300">
-                <h2>Course Name</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque et hic ipsam.</p>
-                <button>Add Course</button>
-            </div>
-            <div class="inner-card">
-                <img src="./image/dies.jpg" alt="dies picture" width="300">
-                <h2>Course Name</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque et hic ipsam.</p>
-                <button>Add Course</button>
-            </div>
-            <div class="inner-card">
-                <img src="./image/dies.jpg" alt="dies picture">
-                <h2>Course Name</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque et hic ipsam.</p>
-                <button>Add Course</button>
-            </div>
-            <div class="inner-card">
-                <img src="./image/dies.jpg" alt="dies picture" width="300">
-                <h2>Course Name</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque et hic ipsam.</p>
-                <button>Add Course</button>
-            </div>
-            <div class="inner-card">
-                <img src="./image/dies.jpg" alt="dies picture" width="300">
-                <h2>Course Name</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque et hic ipsam.</p>
-                <button>Add Course</button>
-            </div>
-            <div class="inner-card">
-                <img src="./image/dies.jpg" alt="dies picture" width="300">
-                <h2>Course Name</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque et hic ipsam.</p>
-                <button>Add Course</button>
-            </div> --%>
         </div>     
 
     

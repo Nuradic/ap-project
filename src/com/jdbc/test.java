@@ -1,6 +1,11 @@
 
 package com.jdbc;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.RMISecurityManager;
+import java.rmi.RemoteException;
+
 // import java.sql.*;
 // import java.util.stream.Stream;
 // import java.time.*;
@@ -10,10 +15,12 @@ package com.jdbc;
 import java.sql.SQLException;
 // import java.text.SimpleDateFormat;
 
+import com.models.Course;
+
 // import javax.xml.crypto.Data;
 
 public class test {
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException, MalformedURLException {
 
         // Connection con = Database.connect();
 
@@ -56,7 +63,8 @@ public class test {
 
         // Database.setDepartment(dep);
 
-        // Course co = new Course("CSE0892");
+        // Course co = new Course("Data Structures and Algorithims");
+        // co.setDescription("ADT Searchs Optimizations");
 
         // co.setDeparment(1);
 
@@ -72,6 +80,16 @@ public class test {
         // ArrayList<Course> lk = Database.getCourses(1);
 
         // System.out.println(lk.size());
+
+        // System.out.println("hello me".replaceAll("me", "it is me"));
+        try {
+            System.setSecurityManager(new RMISecurityManager());
+            SampleServer s = new SampleServer();
+            Naming.rebind("Sample1", s);
+            System.out.println("Server Waiting...");
+        } catch (RemoteException e) {
+
+        }
 
     }
 }

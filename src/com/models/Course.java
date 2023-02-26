@@ -20,7 +20,7 @@ public class Course implements Model {
 
     private ArrayList<Student> students;
 
-    public Course(String name) {
+    public Course(String name) throws ClassNotFoundException {
         this.name = name;
     }
 

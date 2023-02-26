@@ -301,3 +301,10 @@ footer a {
     font-weight: bold;
     color: #003;
 } 
+
+
+.card-container img{
+    width:300px;
+    height:200px;
+    object-fit: cover;
+}

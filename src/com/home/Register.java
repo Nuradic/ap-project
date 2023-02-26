@@ -1,6 +1,5 @@
 package com.home;
 
-// import javax.servlet.GenericServlet;
 import javax.servlet.http.*;
 
 import com.jdbc.Database;
@@ -58,9 +57,8 @@ public class Register extends HttpServlet {
         String lname = req.getParameter("lname");
         String pass = req.getParameter("password");
         String pass2 = req.getParameter("password2");
-        System.out.println("Posting something");
-
         User user = new User(fname, email);
+
         user.setLname(lname);
         user.setPassword(pass);
         user.setIsAdminUser(false);
@@ -68,10 +66,8 @@ public class Register extends HttpServlet {
         try {
             Database.setUser(user);
         } catch (ClassNotFoundException | SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        // req.authenticate(res);
 
     }
 

@@ -18,15 +18,6 @@ public class Database {
 
     }
 
-    // public ResultSet getQueryResult(String stmp) throws ClassNotFoundException,
-    // SQLException {
-    // Connection con = connect();
-    // Statement statement = con.createStatement();
-    // PreparedStatement prestmp = con.prepareStatement("CREATE TABLE STD");
-    // return statement.executeQuery(stmp);
-
-    // }
-
     public static void closeConnection() {
 
     }
@@ -49,7 +40,6 @@ public class Database {
 
         return stat.executeQuery(statement);
 
-        // return null;
     }
 
     public static ResultSet get(int value, String column, Tables table) throws ClassNotFoundException, SQLException {
@@ -91,6 +81,26 @@ public class Database {
         Connection con = connect();
         Statement state = con.createStatement();
         return state.executeQuery(statement);
+
+    }
+
+    public static Course getCourse(int id) throws ClassNotFoundException, SQLException {
+        String statement = "SELECT* FROM COURSE WHERE id=" + id;
+
+        ResultSet rs = get(statement);
+
+        if (rs.next()) {
+            Course cors = new Course(rs.getString("name"));
+            cors.setCover(rs.getString("cover"));
+            cors.setDescription(rs.getString("description"));
+            cors.setId(rs.getInt("id"));
+            cors.setMaterials(getCourseMaterials(cors));
+
+            return cors;
+
+        }
+
+        return null;
 
     }
 
@@ -158,35 +168,6 @@ public class Database {
 
     }
 
-    public static Boolean setDepartment(Department dep) throws ClassNotFoundException, SQLException {
-
-        ArrayList<Object> values = new ArrayList<Object>();
-
-        values.add(dep.getName());
-        values.add(dep.getDesc());
-
-        String[] columns = { "name", "description" };
-
-        return insert(values, columns, Tables.DEPARTMENT);
-
-    }
-
-    public static Department getDepartment(String name) throws ClassNotFoundException, SQLException {
-
-        ResultSet rs = get(name, "name", Tables.DEPARTMENT);
-
-        if (rs.next()) {
-            Department dep = new Department();
-
-            dep.setName(name);
-            dep.setDesc(rs.getString("description"));
-
-            return dep;
-        }
-
-        return null;
-    }
-
     public static ArrayList<Course> getCourses(int user_id) throws ClassNotFoundException, SQLException {
         String statement = "SELECT course_user.payment,course.name,course.description,course.id FROM course_user INNER JOIN COURSE ON course.id=course_user.course_id WHERE user_id="
                 + user_id;
@@ -225,11 +206,14 @@ public class Database {
         while (rs.next()) {
             String name = rs.getString("name");
             String desc = rs.getString("description");
+            String cover = rs.getString("cover");
 
             int id = rs.getInt("id");
             cors = new Course(name);
             cors.setId(id);
             cors.setDescription(desc);
+            cors.setCover(cover);
+            cors.setMaterials(getCourseMaterials(cors));
 
             courses.add(cors);
 
@@ -243,8 +227,9 @@ public class Database {
 
         values.add(course.getName());
         values.add(course.getDescription());
+        values.add(course.getCover());
 
-        String[] columns = { "name", "description" };
+        String[] columns = { "name", "description", "cover" };
 
         return insert(values, columns, Tables.COURSE);
     }
@@ -300,32 +285,6 @@ public class Database {
 
     }
 
-    // public static Student getStudent(String email) throws ClassNotFoundException,
-    // SQLException {
-
-    //
-
-    // ResultSet rs = get(email, "email", Tables.STUDENT);
-
-    // if (rs.next()) {
-    // String fname = rs.getString("fname");
-    // String lname = rs.getString("lname");
-    // String r = rs.getString("lname");
-    // int dep_id = rs.getInt("dep_id");
-    // Student student = new Student(fname, email);
-    // student.setLname(lname);
-    // student.setDep_id(dep_id);
-
-    // String email=rs.getString("email");
-
-    // return student;
-
-    // }
-
-    // return new Student(email, email);
-
-    // }
-
     public static User getUser(String email) throws SQLException, ClassNotFoundException {
         ResultSet rs = get(email, "email", Tables.USER);
 
@@ -356,10 +315,8 @@ public class Database {
             String lname = rs.getString("lname");
             String password = rs.getString("password");
             Boolean isAdminUser = rs.getBoolean("isAdminUser");
-            // int dep_id = rs.getInt("dep_id");
             String email = rs.getString("email");
             User user = new User(fname, email);
-            // user.setDep_id(dep_id);
             user.setLname(lname);
             user.setId(id);
             user.setIsAdminUser(isAdminUser);
