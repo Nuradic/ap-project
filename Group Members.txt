@@ -1,0 +1,6 @@
+Group members with their ids.
+-Murad Hussen    ugr/24050/13
+-Beamlak Tadesse ugr/22680/13
+-Bisrat Yared    ugr/22534/13
+-Biruk Aklilu    ugr/23404/13
+-Natnael Getu    ugr/23830/13
