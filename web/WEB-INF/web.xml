@@ -10,6 +10,14 @@
         <servlet-class>com.utils.UploadFile</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>items</servlet-name>
+        <servlet-class>com.home.Items</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>admin</servlet-name>
+        <servlet-class>com.home.Admin</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>question</servlet-name>
         <servlet-class>com.question.QuestionServlet</servlet-class>
     </servlet>
@@ -41,6 +49,10 @@
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>admin</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>course</servlet-name>
         <url-pattern>/course</url-pattern>
     </servlet-mapping>
@@ -59,6 +71,10 @@
     <servlet-mapping>
         <servlet-name>question</servlet-name>
         <url-pattern>/question</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>items</servlet-name>
+        <url-pattern>/items</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>upload</servlet-name>

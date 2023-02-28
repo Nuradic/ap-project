@@ -5,6 +5,7 @@ import javax.servlet.http.*;
 
 import com.jdbc.Database;
 import com.models.Course;
+import com.models.User;
 import com.utils.Authentication;
 import com.utils.Components;
 
@@ -24,6 +25,17 @@ public class Home extends HttpServlet {
 
         try {
             res2 = Authentication.authenticate(req, res);
+            User us = Authentication.authenticate(req);
+            String navs = us != null && us.getIsAdminUser() ? """
+                    <li class="nav-item">
+                    <a href="upload">Upload</a>
+                    </li>
+                    <li class="nav-item">
+                    <a href="course">Course</a>
+                    </li>
+                        """ : "";
+
+            ;
             if (res2 == null) {
                 RequestDispatcher dispatcher = req.getRequestDispatcher("/login.html");
                 dispatcher.forward(req, res);
@@ -35,10 +47,10 @@ public class Home extends HttpServlet {
 
                 String header = search == null || search.strip().equals("")
 
-                        ? Components.HEADER
+                        ? Components.HEADER.replace("value-here", "")
                         : Components.HEADER.replace("<h1><span> TOP</span> Categories</h1>", "").replace("value-here",
                                 search);
-                out.println(header);
+                out.println(header.replace("nav-here", navs));
                 String card = "";
 
                 for (Course cors : courses) {
@@ -80,10 +92,10 @@ public class Home extends HttpServlet {
         PrintWriter out = res.getWriter();
         try {
             res2 = Authentication.authenticate(req, res);
-            req.setAttribute("user", "hero one");
+            // req.setAttribute("user", "hero one");
 
             if (res2 == null) {
-                System.out.println("calling from if");
+                // System.out.println("calling from if");
 
                 RequestDispatcher dis = req.getRequestDispatcher("/login.html");
                 String o = """
@@ -102,13 +114,16 @@ public class Home extends HttpServlet {
 
                 req.setAttribute("courses", cors);
 
-                RequestDispatcher dis = req.getRequestDispatcher("/head.html");
+                // RequestDispatcher dis = req.getRequestDispatcher("");
+                res.sendRedirect("home");
 
-                dis.include(req, res2);
+                // dis.forward(req, res2);
 
             }
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (ClassNotFoundException |
+
+                SQLException e) {
             e.printStackTrace();
         }
 

@@ -153,17 +153,9 @@ public class Components {
             <h1>AISS</h1>
             <ul class="home-navigation">
             <li class="nav-item">
-            <a href="#HOME">HOME</a>
+            <a href="question">Ask</a>
             </li>
-            <li class="nav-item">
-            <a href="#Messages">Messages</a>
-            </li>
-            <li class="nav-item">
-            <a href="#CONTACT">Ask</a>
-            </li>
-            <li class="nav-item">
-            <a href="#HELP">Support</a>
-            </li>
+            nav-here
             <li class="nav-item">
             <a href="logout">LOG OUT</a>
             </li>
@@ -247,9 +239,9 @@ public class Components {
                 <nav >
                     <h1>AISS</h1>
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="home">Home</a></li>
+                        <li><a href="upload">Upload</a></li>
+                        <li><a href="question">Ask</a></li>
                     </ul>
                 </nav>
                 <br>
@@ -360,24 +352,27 @@ public class Components {
                     <h4 class="w3-center">My Profile</h4>
                    <p class="w3-center"><img src="/img/admin.jpg" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
                    <hr>
-                   <p class="admininfo"><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Admin </p>
+                   <p class="admininfo"><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> user-here </p>
                    <p class="admininfo"><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> Adama, Ethiopia</p>
                    <p class="admininfo"><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1,2002 </p>
                   </div>
                 </div>
                 <br>
                 <div class="middle">
+                <form action="question" method="POST">
 
                   <div class="w3-row-padding">
                     <div class="w3-col m12">
                       <div class="w3-card w3-round w3-white">
                         <div class="w3-container w3-padding">
-                          <p contenteditable="true" class="w3-border w3-padding">Status: </p>
-                          <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i> &nbsp;Post</button>
+                          <textarea type="textarea" contenteditable="true" class="w3-border w3-padding" name="post"></textarea></br>
+                          <button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i> &nbsp;Post</button>
                         </div>
                       </div>
                     </div>
                   </div>
+
+                  </form>
 
                  cards-here
 
@@ -412,5 +407,122 @@ public class Components {
             </html>
 
                                     """;
+
+    public static String ADMIN = """
+
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Admin Dashboard</title>
+
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+                <link rel="stylesheet" href="css/admin_dashboard_style.css">
+
+            </head>
+            <body>
+                <div id="mySidenav" class="sidenav">
+                    <p class="logo"> <span>AISS</p>
+                    <a href="#" class="icon-a"><i class="fa fa-dashboard icons"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dashboard</a>
+                    <a href="#" class="icon-a"><i class="fa fa fa-users icons"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Users</a>
+                    <a href="#" class="icon-a"><i class="fa fa-list icons"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Material list</a>
+                    <a href="#" class="icon-a"><i class="fa fa-list-alt icons"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Order list</a>
+                    <a href="#" class="icon-a"><i class="fa fa-cog icons"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Setting</a>
+                    <a href="#" class="icon-a"><i class="fa fa-power-off icons"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Log-Out</a>
+
+
+                </div>
+                <style>
+                *{font-family: Georgia, serif;}
+                </style>
+               <div id="main">
+                <div class="head">
+                    <div class="col-div-6">
+                        <span style="font-size: 30px; cursor: pointor;color: white;" class="nav"> &#9776; Dashboard</span>
+                        <span style="font-size: 30px; cursor: pointor;color: white;" class="nav2"> &#9776; Dashboard</span>
+                    </div>
+                    <div class="col-div-6"></div>
+
+                    <div class="profile">
+                        <img src="img/admin.jpg" style="border-radius: 90px;" alt="admin" height="70px" width="80px">
+                        <span style="color: white;">Admin</span>
+                    </div>
+
+
+                </div>
+                <div class="clearfix"></div>
+
+               <div class="col-div-3">
+                <div class="box">
+                    <p>
+                              <br/>
+                    <span>Users
+                    </span></p>
+                    <i class="fa fa-users box-icon"></i>
+                </div>
+               </div>
+
+
+               <div class="col-div-3">
+                <div class="box">
+                    <p>
+                             <br/>
+                    <span>Orders
+                    </span></p>
+                    <i class="fa fa-shopping-bag box-icon"></i>
+                    </div>
+               </div>
+
+               <div class="col-div-3">
+                <div class="box">
+                    <p>
+                              <br/>
+                    <span>Books In Store
+                    </span></p>
+                    <i class="fa fa-tasks box-icon"></i>
+                </div>
+               </div>
+
+
+
+               <div class="clearfix"></div>
+               <br/><br/>
+
+
+            <div class="clearfix"></div>
+
+            </div>
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+               <script>
+                $(".nav").click(function(){
+                $("#mySidenav").css('width','70px');
+                      $("#main").css('margin-left','70px');
+                      $(".logo").css('visibility', 'hidden');
+                      $(".logo span").css('visibility','visible');
+                      $(".logo span").css('margin-left','-10px');
+                      $(".icons.a").css('visibility', 'hidden');
+                      $(".icons").css('visibility', 'visible');
+                      $(".icons").css('margin-left', '-8px');
+                      $(".nav").css('display', 'none');
+                      $(".nav2").css('display', 'block');
+                });
+                $(".nav2").click(function(){
+                    $("#mySidenav").css('width' , '300px');
+                          $("#main").css('margin-left', '300px');
+                          $(".logo").css('visibility', 'visible');
+                          $(".logo span").css('visibility', 'visible');
+                          $(".icons.a").css('visibility', 'visible');
+                          $(".icons").css('visibility', 'visible');
+                          $(".nav").css('display', 'block');
+                          $(".nav2").css('display', 'none');
+                });
+
+               </script>
+            </body>
+            </html>
+                                                    """;
 
 }

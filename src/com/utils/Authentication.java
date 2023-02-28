@@ -25,7 +25,6 @@ public class Authentication {
             }
 
             if ((map.containsKey("id") && map.containsKey("password"))) {
-                System.out.println(map.get("id"));
                 try {
 
                     int id = Integer.parseInt((String) map.get("id"));
@@ -35,6 +34,7 @@ public class Authentication {
                     user = authenticate(id, pass);
 
                     if (user != null)
+
                         return res;
 
                 } catch (NumberFormatException e) {
@@ -59,6 +59,42 @@ public class Authentication {
             return setCookie(res, user);
         }
 
+        return null;
+
+    }
+
+    public static User authenticate(HttpServletRequest req) throws ClassNotFoundException, SQLException {
+        Cookie[] cookies = req.getCookies();
+        Cookie cookie;
+        Map<String, Object> map = new TreeMap<String, Object>();
+        User user;
+
+        if (cookies != null) {
+
+            for (int i = 0; i < cookies.length; i++) {
+                cookie = cookies[i];
+                map.put(cookie.getName(), cookie.getValue());
+
+            }
+
+            if ((map.containsKey("id") && map.containsKey("password"))) {
+                try {
+
+                    int id = Integer.parseInt((String) map.get("id"));
+
+                    String pass = (String) map.get("password");
+
+                    user = authenticate(id, pass);
+
+                    if (user != null)
+
+                        return user;
+
+                } catch (NumberFormatException e) {
+
+                }
+            }
+        }
         return null;
 
     }

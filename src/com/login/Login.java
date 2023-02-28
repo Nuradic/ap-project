@@ -21,18 +21,13 @@ public class Login extends HttpServlet {
         try {
             res2 = Authentication.authenticate(req, res);
             if (res2 == null) {
-                RequestDispatcher dis = req.getRequestDispatcher("/login.html");
+                RequestDispatcher dis = req.getRequestDispatcher("login");
 
-                String o = """
-                        <script>
-                        alert("Invalid Login Credentials")
-                        </script>
-                        """;
-
-                out.println(o);
-                dis.include(req, res);
+                dis.forward(req, res);
 
             } else {
+                RequestDispatcher dis = req.getRequestDispatcher("home");
+                dis.forward(req, res2);
 
             }
         } catch (ClassNotFoundException e) {
@@ -41,8 +36,8 @@ public class Login extends HttpServlet {
             e.printStackTrace();
         }
 
-        out.print("<html><body>");
-        out.print("</body></html>");
+        // out.print("<html><body>");
+        // out.print("</body></html>");
     }
 
 }

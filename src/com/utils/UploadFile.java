@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServlet;
 import com.jdbc.Database;
 import com.models.Course;
 import com.models.CourseMaterial;
+import com.models.User;
 import com.oreilly.servlet.MultipartRequest;
 
 import java.io.File;
@@ -14,6 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
@@ -40,6 +42,23 @@ public class UploadFile extends HttpServlet {
         Iterator<String> it = upload.getFileNames().asIterator();
         int course_id = Integer.parseInt(upload.getParameter("course"));
 
+        User uw;
+
+        try {
+            uw = Authentication.authenticate(req);
+            if (uw == null) {
+                RequestDispatcher dis = req.getRequestDispatcher("login");
+                dis.forward(req, res);
+
+            }
+            if (!uw.getIsAdminUser()) {
+                RequestDispatcher dis = req.getRequestDispatcher("home");
+                dis.forward(req, res);
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+
         while (it.hasNext()) {
             String url = it.next();
             File file = upload.getFile(url);
@@ -59,6 +78,21 @@ public class UploadFile extends HttpServlet {
 
     public void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, java.io.IOException {
+        User uw;
+        try {
+            uw = Authentication.authenticate(req);
+            if (uw == null) {
+                RequestDispatcher dis = req.getRequestDispatcher("login");
+                dis.forward(req, res);
+
+            }
+            if (!uw.getIsAdminUser()) {
+                RequestDispatcher dis = req.getRequestDispatcher("home");
+                dis.forward(req, res);
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
 
         try {
             ArrayList<Course> cors = Database.getCourses();
@@ -81,9 +115,9 @@ public class UploadFile extends HttpServlet {
                             <nav>
                                 <h1 class="main_text">AISS</h1>
                               <ul>
-                                <li><a href="/academy/home">Home</a></li>
-                                <li><a href="/academy/addCourse">Add Course</a></li>
-                                <li><a href="#">Help</a></li>
+                                <li><a href="home">Home</a></li>
+                                <li><a href="course">Add Course</a></li>
+                               <li><a href="items">Manage</a></li>
                               </ul>
                             </nav>
 

@@ -58,6 +58,8 @@ public class Register extends HttpServlet {
         String pass = req.getParameter("password");
         String pass2 = req.getParameter("password2");
         User user = new User(fname, email);
+        res.setContentType("text/html");
+        PrintWriter out = res.getWriter();
 
         user.setLname(lname);
         user.setPassword(pass);
@@ -65,6 +67,11 @@ public class Register extends HttpServlet {
 
         try {
             Database.setUser(user);
+            String o = "<script>alert(\"Succesfully registered\")</script>";
+            RequestDispatcher dis = req.getRequestDispatcher("login");
+            out.print(o);
+            dis.include(req, res);
+            // res.sendRedirect("login");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }

@@ -70,7 +70,6 @@ public class Course implements Model {
 
     @Override
     public void save() {
-        // print(this.fname);
 
     }
 

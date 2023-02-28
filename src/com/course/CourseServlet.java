@@ -10,11 +10,13 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
+import com.utils.Authentication;
 import com.utils.Components;
 import com.utils.UploadFile;
 import com.jdbc.Database;
 import com.models.Course;
 import com.models.CourseMaterial;
+import com.models.User;
 import com.oreilly.servlet.MultipartRequest;
 
 public class CourseServlet extends HttpServlet {
@@ -71,13 +73,14 @@ public class CourseServlet extends HttpServlet {
 
         PrintWriter out = res.getWriter();
         String course_id = req.getParameter("course");
+        // User uw = Authentication.authenticate(req);
 
         try {
             int id = Integer.parseInt(course_id);
-            System.out.println("welcome to the hell");
 
             Course cors = Database.getCourse(id);
             System.out.println(cors);
+
             if (cors != null) {
                 String content = Components.COURSEVIEW;
                 content = content.replace("description-here", cors.getDescription()).replace("course-here",
@@ -98,28 +101,81 @@ public class CourseServlet extends HttpServlet {
                             .replaceAll("link-here", mat.getUrl()).replace("item-here", mat.getName());
 
                 }
+
                 content = content.replace("material-here", material).replace("description-here", cors.getDescription());
 
                 out.print(content);
 
             } else {
 
+                res.setContentType("text/html");
+                User uw;
+                try {
+                    uw = Authentication.authenticate(req);
+                    if (uw == null) {
+                        RequestDispatcher dis = req.getRequestDispatcher("login");
+                        dis.forward(req, res);
+
+                    }
+                    if (!uw.getIsAdminUser() && course_id == null) {
+                        RequestDispatcher dis = req.getRequestDispatcher("home");
+                        dis.forward(req, res);
+                    }
+                } catch (ClassNotFoundException | SQLException e) {
+                    e.printStackTrace();
+                }
+
+                out.print(Components.UPLOADCOURSE);
             }
 
         } catch (NumberFormatException e) {
             res.setContentType("text/html");
+            res.setContentType("text/html");
+            User uw;
+            try {
+                uw = Authentication.authenticate(req);
+                if (uw == null) {
+                    RequestDispatcher dis = req.getRequestDispatcher("login");
+                    dis.forward(req, res);
+
+                }
+                if (!uw.getIsAdminUser() && course_id == null) {
+                    RequestDispatcher dis = req.getRequestDispatcher("home");
+                    dis.forward(req, res);
+                }
+            } catch (ClassNotFoundException | SQLException p) {
+                p.printStackTrace();
+            }
 
             out.print(Components.UPLOADCOURSE);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-    public void courseview(HttpServletRequest req, HttpServletResponse res, Course cors) throws IOException {
+    public void courseview(HttpServletRequest req, HttpServletResponse res, Course cors)
+            throws IOException, ServletException {
         res.setContentType("text/html");
 
         PrintWriter out = res.getWriter();
+        User uw;
+
+        try {
+            uw = Authentication.authenticate(req);
+            if (uw == null) {
+                RequestDispatcher dis = req.getRequestDispatcher("login");
+                dis.forward(req, res);
+
+            }
+            if (!uw.getIsAdminUser()) {
+                RequestDispatcher dis = req.getRequestDispatcher("home");
+                dis.forward(req, res);
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
 
         String content = Components.COURSEVIEW;
         content = content.replace("description", cors.getDescription()).replace("course", cors.getName());

@@ -111,7 +111,8 @@ public class Database {
                                 : table == Tables.DEPARTMENT ? "DEPARTMENT"
                                         : table == Tables.USER ? "USER"
                                                 : Tables.COURSE_MATERIAL == table ? "COURSE_MATERIAL"
-                                                        : Tables.COURSE_USER == table ? "COURSE_USER" : "DEFAULT";
+                                                        : Tables.COURSE_USER == table ? "COURSE_USER"
+                                                                : Tables.QUESTION == table ? "QUESTION" : "DEFAULT";
         return t;
     }
 
@@ -127,6 +128,7 @@ public class Database {
             throws ClassNotFoundException, SQLException {
         Connection con = connect();
         String base = "INSERT INTO " + getTable(table);
+        // INSERT INTO SOMETABLE(ID,NAME,FNAME)VALUES(?,?,?)
 
         String cols = base + " (";
         String val = " VALUES(";
@@ -179,11 +181,44 @@ public class Database {
         return insert(values, columns, Tables.QUESTION);
     }
 
-    public static ArrayList<Question> getQuestions() {
+    public static ArrayList<Question> getQuestions() throws ClassNotFoundException, SQLException {
         ArrayList<Question> vals = new ArrayList<Question>();
         String statement = "SELECT* FROM QUESTION ORDER BY date";
 
+        ResultSet rs = get(statement);
+        Question que;
+
+        while (rs.next()) {
+            que = new Question();
+            que.setBody(rs.getString("body"));
+            que.setDate(rs.getDate("date"));
+            que.setDiscussion(null);
+            que.setUser(getUser(rs.getInt("user")));
+            que.setId(rs.getInt("id"));
+            vals.add(que);
+
+        }
+
         return vals;
+    }
+
+    public static ArrayList<Discussion> getDiscussions(Question que) throws ClassNotFoundException, SQLException {
+        String state = "SELECT* FROM DISCUSSION WHERE question=" + que;
+        ArrayList<Discussion> discussions = new ArrayList<Discussion>();
+        ResultSet rs = get(state);
+        while (rs.next()) {
+            Discussion dis = new Discussion();
+            dis.setBody(rs.getString("body"));
+            dis.setQuestion(que.getId());
+            dis.setUser(getUser(rs.getInt("user")));
+            dis.setId(rs.getInt("id"));
+
+            discussions.add(dis);
+
+        }
+
+        return discussions;
+
     }
 
     public static ArrayList<Course> getCourses(int user_id) throws ClassNotFoundException, SQLException {
@@ -213,8 +248,6 @@ public class Database {
 
     public static ArrayList<Course> getCourses(String name) throws ClassNotFoundException, SQLException {
         String st = "SELECT* from COURSE where name LIKE " + "'%" + name + "%'";
-
-        System.out.println(st);
 
         ResultSet rs = get(st);
         ArrayList<Course> courses = new ArrayList<Course>();
@@ -294,6 +327,32 @@ public class Database {
 
     }
 
+    public static ArrayList<CourseMaterial> getCourseMaterials()
+            throws ClassNotFoundException, SQLException {
+        String statement = "SELECT* FROM COURSE_MATERIAL";
+
+        ResultSet rs = get(statement);
+
+        ArrayList<CourseMaterial> mats = new ArrayList<CourseMaterial>();
+
+        while (rs.next()) {
+            String url = rs.getString("url");
+            String name = rs.getString("name");
+            int id = rs.getInt("id");
+            int course_id = rs.getInt("course_id");
+
+            CourseMaterial material = new CourseMaterial(url, course_id);
+            material.setName(name);
+            material.setId(id);
+
+            mats.add(material);
+
+        }
+
+        return mats;
+
+    }
+
     public static ArrayList<CourseMaterial> getCourseMaterials(Course course)
             throws ClassNotFoundException, SQLException {
         String column = "course_id";
@@ -329,6 +388,31 @@ public class Database {
         String[] columns = { "user_id", "course_id" };
 
         return insert(values, columns, Tables.COURSE_USER);
+
+    }
+
+    public static ArrayList<User> getUsers() throws SQLException, ClassNotFoundException {
+        String state = "SELECT* from user";
+
+        ResultSet rs = get(state);
+
+        ArrayList<User> users = new ArrayList<User>();
+
+        while (rs.next()) {
+            String fname = rs.getString("fname");
+            String lname = rs.getString("lname");
+            String password = rs.getString("password");
+            Boolean isAdminUser = rs.getBoolean("isAdminUser");
+            int id = rs.getInt("id");
+            User user = new User(fname, rs.getString("email"));
+            user.setLname(lname);
+            user.setId(id);
+            user.setIsAdminUser(isAdminUser);
+            user.setPassword(password);
+
+            users.add(user);
+        }
+        return users;
 
     }
 
@@ -408,13 +492,23 @@ public class Database {
 
     }
 
-    public static Boolean deleteCourse(int id) throws ClassNotFoundException, SQLException {
-        return Delete("id", Tables.COURSE, "" + id);
+    public static Boolean deleteCourse(String id) throws ClassNotFoundException, SQLException {
+        return Delete("id", Tables.COURSE, id);
 
     }
 
     public static Boolean deleteUser(String email) throws ClassNotFoundException, SQLException {
         return Delete("email", Tables.USER, email);
+    }
+
+    public static Boolean deleteMaterial(String mats) throws ClassNotFoundException, SQLException {
+        return Delete("id", Tables.COURSE_MATERIAL, mats);
+
+    }
+
+    public static Boolean deleteQuestion(String que) throws ClassNotFoundException, SQLException {
+        return Delete("id", Tables.QUESTION, que);
+
     }
 
 }

@@ -16,6 +16,7 @@ import java.sql.SQLException;
 // import java.text.SimpleDateFormat;
 
 import com.models.Course;
+import com.models.User;
 
 // import javax.xml.crypto.Data;
 
@@ -90,6 +91,12 @@ public class test {
         // } catch (RemoteException e) {
 
         // }
+
+        User user = new User("Mr", "mure@ko.com");
+        user.setIsAdminUser(true);
+        user.setPassword("1234567");
+        user.setLname("");
+        Database.setUser(user);
 
     }
 }
